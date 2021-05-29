@@ -5,10 +5,36 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.china2b2t.twilightx.TwilightX;
 
 public class PlayerListener implements Listener {
+    @EventHandler
+    public void onChat(AsyncPlayerChatEvent e) {
+        if (TwilightX.config.isSet("chat-coloring") && TwilightX.config.getBoolean("chat-coloring")) {
+            if (e.getMessage().charAt(0) == '>') {
+                e.setMessage(ChatColor.GREEN + e.getMessage());
+            }
+        }
+    }
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent e) {
+        if (TwilightX.config.isSet("disable-join-quit-msg") && TwilightX.config.getBoolean("disable-join-quit-msg")) {
+            e.setJoinMessage(null);
+        }
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent e) {
+        if (TwilightX.config.isSet("disable-join-quit-msg") && TwilightX.config.getBoolean("disable-join-quit-msg")) {
+            e.setQuitMessage(null);
+        }
+    }
+
     @EventHandler
     public void onCommand(PlayerCommandPreprocessEvent e) {
         if (e.getMessage().equalsIgnoreCase("help") || e.getMessage().equalsIgnoreCase("minecraft:help")) {

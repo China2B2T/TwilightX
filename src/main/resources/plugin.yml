@@ -11,3 +11,6 @@ commands:
     aliases: [pl, plugin]
   twiload:
     description: Reload TwilightX
+  msg:
+    description: Send a PM
+    aliases: [tell, message, pm, whisper]

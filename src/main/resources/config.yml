@@ -1,3 +1,12 @@
+# Deop when quit (TODO)
+deop-when-quit: false
+
+# Disable join & quit message
+disable-join-quit-msg: true
+
+# Chat coloring
+chat-coloring: true
+
 # Enable plugin query?
 enable-plugin-query: true
 
