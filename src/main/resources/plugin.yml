@@ -1,0 +1,13 @@
+main: org.china2b2t.twilightx.
+name: TwilightX
+version: 1.0
+author: Rabbit0w0
+api-version: 1.12
+commands:
+  kill:
+    description: Suicide
+  plugins:
+    description: Get a list of the plugins
+    aliases: [pl, plugin]
+  twiload:
+    description: Reload TwilightX

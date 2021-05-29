@@ -1,0 +1,12 @@
+# Enable plugin query?
+enable-plugin-query: true
+
+# Enable suicide?
+enable-suicide: true
+
+# Enable custom help?
+enable-help: true
+
+# Help message
+help:
+  - "&6China2B2T!"
