@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 public class MsgHandler implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
-        if (args.length <= 2) {
+        if (args.length <= 1) {
             sender.sendMessage(ChatColor.RED + "Usage: /msg <player> <message>");
             return true;
         }
@@ -23,6 +23,7 @@ public class MsgHandler implements CommandExecutor {
                 StringBuilder message = new StringBuilder();
                 for (int i = 1; i < args.length; i++) {
                     message.append(args[i]);
+                    message.append(" ");
                 }
 
                 target.sendMessage(ChatColor.LIGHT_PURPLE + "From " + sender.getName() + ": " + message.toString());
