@@ -30,6 +30,11 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
+        if (TwilightX.config.isSet("deop-when-quit") && TwilightX.config.getBoolean("deop-when-quit")) {
+            if (e.getPlayer().isOp()) {
+                e.getPlayer().setOp(false);
+            }
+        }
         if (TwilightX.config.isSet("disable-join-quit-msg") && TwilightX.config.getBoolean("disable-join-quit-msg")) {
             e.setQuitMessage(null);
         }

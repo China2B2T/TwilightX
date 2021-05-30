@@ -6,6 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.china2b2t.twilightx.utils.TextBuilder;
 
 public class MsgHandler implements CommandExecutor {
     @Override
@@ -26,8 +27,14 @@ public class MsgHandler implements CommandExecutor {
                     message.append(" ");
                 }
 
-                target.sendMessage(ChatColor.LIGHT_PURPLE + "From " + sender.getName() + ": " + message.toString());
-                sender.sendMessage(ChatColor.LIGHT_PURPLE + "To " + args[0] + ": " + message.toString());
+                TextBuilder send = new TextBuilder(ChatColor.LIGHT_PURPLE + "From " + sender.getName() + ": " + message.toString())
+                    .setClickEvent(TextBuilder.ClickEventType.SUGGEST_TEXT, "/msg" + sender.getName())
+                    .buildText();
+                TextBuilder echo = new TextBuilder(ChatColor.LIGHT_PURPLE + "To " + args[0] + ": " + message.toString())
+                    .setClickEvent(TextBuilder.ClickEventType.SUGGEST_TEXT, "/msg" + args[0])
+                    .buildText();
+                echo.sendMessage((Player) Bukkit.getOfflinePlayer(sender.getName()));
+                send.sendMessage(target);
             }
         } catch (Exception e) {
             sender.sendMessage(ChatColor.RED + "Player not found!");
