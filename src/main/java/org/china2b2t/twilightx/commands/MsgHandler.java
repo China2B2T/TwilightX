@@ -35,7 +35,7 @@ public class MsgHandler implements CommandExecutor {
                 TextComponent send = new TextComponent(sendMsg);
                 TextComponent echo = new TextComponent(echoMsg);
                 send.setClickEvent(new ClickEvent(Action.SUGGEST_COMMAND, "/msg " + sender.getName()));
-                echo.setClickEvent(new ClickEvent(Action.SUGGEST_COMMAND, "/msg" + args[0]));
+                echo.setClickEvent(new ClickEvent(Action.SUGGEST_COMMAND, "/msg " + args[0]));
                 ((Player) Bukkit.getOfflinePlayer(sender.getName())).spigot().sendMessage(echo);
                 target.spigot().sendMessage(send);
             }
