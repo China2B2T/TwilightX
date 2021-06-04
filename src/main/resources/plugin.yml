@@ -14,3 +14,6 @@ commands:
   msg:
     description: Send a PM
     aliases: [tell, message, pm, whisper]
+  pluginmgr
+    description: Plugin manager
+    aliases: [plm, plmgr]

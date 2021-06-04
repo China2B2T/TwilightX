@@ -8,6 +8,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.china2b2t.twilightx.commands.KillHandler;
 import org.china2b2t.twilightx.commands.MsgHandler;
+import org.china2b2t.twilightx.commands.PluginmgrHandler;
 import org.china2b2t.twilightx.commands.TwiloadHandler;
 import org.china2b2t.twilightx.events.PlayerListener;
 
@@ -37,6 +38,7 @@ public class TwilightX extends JavaPlugin {
         this.getServer().getPluginCommand("kill").setExecutor(new KillHandler());
         this.getServer().getPluginCommand("twiload").setExecutor(new TwiloadHandler());
         this.getServer().getPluginCommand("msg").setExecutor(new MsgHandler());
+        this.getServer().getPluginCommand("pluginmgr").setExecutor(new PluginmgrHandler());
 
         this.getLogger().log(Level.INFO, ChatColor.GREEN + "> TwilightX by China2B2T <");
         this.getLogger().log(Level.INFO, ChatColor.GREEN+ "Loaded successfully!");
