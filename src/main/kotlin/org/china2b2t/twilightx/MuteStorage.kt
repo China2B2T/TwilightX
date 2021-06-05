@@ -20,7 +20,7 @@ class MuteStorage {
         }
 
         fun isMuted(player: Player): Boolean {
-            if (muted.contains(player)) {
+            if (muted!!.contains(player)) {
                 return true
             }
             return false
