@@ -4,23 +4,17 @@ import org.bukkit.entity.Player
 
 class MuteStorage {
     companion object{
-        var muted: Array<Player>? = arrayOf()
-
-        fun setMuted(player: Player, mute: Boolean) {
-            if (!mute) {
-                if (muted!!.contains(player)) {
-                    //
-                }
-            }
-            if (muted!!.contains(player)) {
-                return
-            }
-
-            muted?.set(muted!!.size, player)
+        fun setMuted(player: Player, muted: Boolean) {
+            var uuid = player.uniqueId;
+            TwilightX.data?.set("$uuid.muted", muted)
         }
 
         fun isMuted(player: Player): Boolean {
-            if (muted!!.contains(player)) {
+            var uuid = player.uniqueId
+            if(TwilightX.data?.isSet("$uuid.muted") == false) {
+                return false
+            }
+            if(TwilightX.data?.getBoolean("$uuid.muted") == true) {
                 return true
             }
             return false

@@ -9,10 +9,28 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.china2b2t.twilightx.MuteStorage;
+import org.china2b2t.twilightx.TwilightX;
 
 public class PlayerListener implements Listener {
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e) {
+        if (MuteStorage.Companion.isMuted(e.getPlayer())) {
+            e.setCancelled(true);
+            String message = e.getMessage();
+
+            if (TwilightX.config.isSet("chat-coloring") && TwilightX.config.getBoolean("chat-coloring")) {
+                if (message.charAt(0) == '>') {
+                    message = ChatColor.GREEN + message;
+                }
+            }
+
+            // Fake a echo
+            e.getPlayer().sendMessage("<" + e.getPlayer().getName() + "> " + message);
+
+            return;
+        }
+
         if (TwilightX.config.isSet("chat-coloring") && TwilightX.config.getBoolean("chat-coloring")) {
             if (e.getMessage().charAt(0) == '>') {
                 e.setMessage(ChatColor.GREEN + e.getMessage());
