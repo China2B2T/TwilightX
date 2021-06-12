@@ -32,6 +32,8 @@ class MuteHandler :CommandExecutor {
                     }
 
                     MuteStorage.setMuted(player, true)
+
+                    sender.sendMessage(prefix + "Muted ${player.name}")
                 } catch(e: Exception) {
                     sender.sendMessage(prefix + "Cannot find player ${args[0]}")
                 }

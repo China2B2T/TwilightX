@@ -13,7 +13,7 @@ commands:
     description: Reload TwilightX
   msg:
     description: Send a PM
-    aliases: [tell, message, pm, whisper]
+    aliases: [tell, message, pm, whisper, w]
   pluginmgr:
     description: Plugin manager
     aliases: [plm, plmgr]

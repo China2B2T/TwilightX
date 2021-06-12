@@ -61,10 +61,9 @@ class PlayerListener : Listener {
         } else {
             e.message.substring(0, e.message.indexOf(" ")).substring(1)
         }
-        if (cmd.equals("help", ignoreCase = true) || cmd.equals(
-                "minecraft:help",
-                ignoreCase = true
-            ) || cmd.equals("bukkit:help", ignoreCase = true)
+        if (cmd.equals("help", ignoreCase = true) ||
+            cmd.equals("minecraft:help", ignoreCase = true) ||
+            cmd.equals("bukkit:help", ignoreCase = true)
         ) {
             if (TwilightX.config.isSet("enable-help") && TwilightX.config.getBoolean("enable-help")) {
                 e.isCancelled = true

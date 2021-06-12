@@ -24,18 +24,20 @@ class KillHandler : CommandExecutor {
         commandLabel: String,
         args: Array<String>
     ): Boolean {
-        // if (sender.isOp()) {
-        //     Bukkit.dispatchCommand(sender, "/minecraft:kill " + args[0]);
-        // }
+        if (sender.isOp) {
+             Bukkit.dispatchCommand(sender, "minecraft:kill " + args[0]);
+        }
+
         if (TwilightX.config.isSet("enable-suicide")) {
             if (TwilightX.config.getBoolean("enable-suicide")) {
-                (sender as Damageable).damage(32767.0)
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "minecraft:kill" + args[0])
             } else {
                 sender.sendMessage(prefix + "Suicide disabled!")
             }
         } else {
             sender.sendMessage(prefix + "Suicide disabled!")
         }
+
         return true
     }
 }
