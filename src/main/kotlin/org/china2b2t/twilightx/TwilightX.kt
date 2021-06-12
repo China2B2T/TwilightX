@@ -1,12 +1,8 @@
 package org.china2b2t.twilightx
 
-import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.plugin.java.JavaPlugin
-import org.china2b2t.twilightx.commands.KillHandler
-import org.china2b2t.twilightx.commands.MsgHandler
-import org.china2b2t.twilightx.commands.PluginmgrHandler
-import org.china2b2t.twilightx.commands.TwiloadHandler
+import org.china2b2t.twilightx.commands.*
 import org.china2b2t.twilightx.events.PlayerListener
 import java.io.File
 import java.io.IOException
@@ -41,6 +37,8 @@ class TwilightX : JavaPlugin() {
         this.server.getPluginCommand("twiload").executor = TwiloadHandler()
         this.server.getPluginCommand("msg").executor = MsgHandler()
         this.server.getPluginCommand("pluginmgr").executor = PluginmgrHandler()
+        this.server.getPluginCommand("mute").executor = MuteHandler()
+        this.server.getPluginCommand("unmute").executor = UnmuteHandler()
 
         this.logger
             .log(java.util.logging.Level.INFO, org.bukkit.ChatColor.GREEN.toString() + "> TwilightX by China2B2T <")
