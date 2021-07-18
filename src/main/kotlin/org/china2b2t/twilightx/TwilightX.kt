@@ -39,6 +39,7 @@ class TwilightX : JavaPlugin() {
         this.server.getPluginCommand("pluginmgr").executor = PluginmgrHandler()
         this.server.getPluginCommand("mute").executor = MuteHandler()
         this.server.getPluginCommand("unmute").executor = UnmuteHandler()
+        this.server.getPluginCommand("ignore").executor = IgnoreHandler()
 
         this.logger
             .log(java.util.logging.Level.INFO, org.bukkit.ChatColor.GREEN.toString() + "> TwilightX by China2B2T <")

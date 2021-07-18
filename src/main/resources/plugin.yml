@@ -21,3 +21,5 @@ commands:
     description: Mute someone
   unmute:
     description: Unmute someone
+  ignore:
+    description: Ignore someone

@@ -37,17 +37,17 @@ class MsgHandler : CommandExecutor {
                     message.append(args[i])
                     message.append(" ")
                 }
-                val echoMsg = ChatColor.LIGHT_PURPLE.toString() + "To " + args[0] + ": " + message.toString()
-                val sendMsg = ChatColor.LIGHT_PURPLE.toString() + "From " + sender.name + ": " + message.toString()
+                val echoMsg = ChatColor.LIGHT_PURPLE.toString() + "发至 " + args[0] + ": " + message.toString()
+                val sendMsg = ChatColor.LIGHT_PURPLE.toString() + "来自 " + sender.name + ": " + message.toString()
                 val send = TextComponent(sendMsg)
                 val echo = TextComponent(echoMsg)
-                send.clickEvent = ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/msg " + sender.name)
-                echo.clickEvent = ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/msg " + args[0])
+                send.clickEvent = ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/msg " + sender.name + " ")
+                echo.clickEvent = ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/msg " + args[0] + " ")
                 (Bukkit.getOfflinePlayer(sender.name) as Player).spigot().sendMessage(echo)
                 target.spigot().sendMessage(send)
             }
         } catch (e: Exception) {
-            sender.sendMessage(ChatColor.RED.toString() + "Player not found!")
+            sender.sendMessage(ChatColor.RED.toString() + "该玩家不在线!")
         }
         return true
     }
