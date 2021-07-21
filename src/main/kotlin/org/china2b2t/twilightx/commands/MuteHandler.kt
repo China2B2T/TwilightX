@@ -26,6 +26,11 @@ class MuteHandler :CommandExecutor {
                 try {
                     var player = Bukkit.getPlayer(args[0])
 
+                    if (player.isOp) {
+                        sender.sendMessage(prefix + "What are you doing?")
+                        return true
+                    }
+
                     if (MuteStorage.isMuted(player)) {
                         sender.sendMessage(prefix + "Already muted ${player.name}")
                         return true

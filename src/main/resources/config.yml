@@ -7,6 +7,27 @@ disable-join-quit-msg: true
 # Chat coloring
 chat-coloring: true
 
+chat-colors:
+  # Colors to use in different groups
+  default:
+    -
+      char: ">"
+      color: "GREEN"
+  donor:
+    -
+      char: ">"
+      color: "GREEN"
+    -
+      char: "'"
+      color: "RED"
+  admin:
+    -
+      char: ">"
+      color: "GREEN"
+    -
+      char: "!"
+      color: "RED"
+
 # Enable plugin query?
 enable-plugin-query: true
 

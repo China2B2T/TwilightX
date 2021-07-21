@@ -1,18 +1,11 @@
 package org.china2b2t.twilightx.commands
 
-import org.bukkit.entity.Player
 import org.bukkit.Bukkit
-import java.lang.StringBuilder
-import net.md_5.bungee.api.chat.ClickEvent
 import org.bukkit.ChatColor
-import org.bukkit.command.*
+import org.bukkit.command.Command
+import org.bukkit.command.CommandExecutor
+import org.bukkit.command.CommandSender
 import org.china2b2t.twilightx.TwilightX
-import org.bukkit.entity.Damageable
-import kotlin.Throws
-import java.lang.IllegalArgumentException
-import org.bukkit.plugin.SimplePluginManager
-import org.china2b2t.twilightx.utils.ReflectionHelper
-import org.bukkit.plugin.java.JavaPlugin
 
 class KillHandler : CommandExecutor {
     private val prefix =
@@ -26,11 +19,12 @@ class KillHandler : CommandExecutor {
     ): Boolean {
         if (sender.isOp) {
              Bukkit.dispatchCommand(sender, "minecraft:kill " + (if (args.isEmpty()) "" else args[0]))
+            return true
         }
 
         if (TwilightX.config.isSet("enable-suicide")) {
             if (TwilightX.config.getBoolean("enable-suicide")) {
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "minecraft:kill" + sender.name)
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "minecraft:kill " + sender.name)
             } else {
                 sender.sendMessage(prefix + "Suicide disabled!")
             }

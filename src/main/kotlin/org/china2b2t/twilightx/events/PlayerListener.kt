@@ -10,26 +10,72 @@ import org.china2b2t.twilightx.TwilightX
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.event.player.PlayerCommandPreprocessEvent
+import org.china2b2t.twilightx.utils.ReflectionSet
+import org.china2b2t.twilightx.utils.ReflectionSet.getEnumConstants
 
 class PlayerListener : Listener {
     @EventHandler
     fun onChat(e: AsyncPlayerChatEvent) {
         if (isMuted(e.player)) {
-            e.isCancelled = true
-            var message = e.message
             if (TwilightX.config.isSet("chat-coloring") && TwilightX.config.getBoolean("chat-coloring")) {
-                if (message[0] == '>') {
-                    message = ChatColor.GREEN.toString() + message
+                if (e.player.isOp()) {
+                    val cl = TwilightX.config.getMapList("chat-colors.admin")
+                    cl.forEach { i ->
+                        if (i["char"] == e.message[0]) {
+                            e.message = ChatColor.getByChar(i["color"].toString()).toString() + e.message
+                            return
+                        }
+                    }
+                } else if (e.player.hasPermission("china2b2t.donor")) {
+                    val cl = TwilightX.config.getMapList("chat-colors.donor")
+                    cl.forEach { i ->
+                        if (i["char"] == e.message[0]) {
+                            e.message = ChatColor.getByChar(i["color"].toString()).toString() + e.message
+                            return
+                        }
+                    }
+                } else {
+                    val cl = TwilightX.config.getMapList("chat-colors.default")
+                    cl.forEach { i ->
+                        if (i["char"] == e.message[0]) {
+                            e.message = ChatColor.getByChar(i["color"].toString()).toString() + e.message
+                            return
+                        }
+                    }
                 }
             }
 
+            e.isCancelled = true
+
             // Fake a echo
-            e.player.sendMessage("<" + e.player.name + "> " + message)
+            e.player.sendMessage("<" + e.player.name + "> " + e.message)
             return
         }
         if (TwilightX.config.isSet("chat-coloring") && TwilightX.config.getBoolean("chat-coloring")) {
-            if (e.message[0] == '>') {
-                e.message = ChatColor.GREEN.toString() + e.message
+            if (e.player.isOp()) {
+                val cl = TwilightX.config.getMapList("chat-colors.admin")
+                cl.forEach { i ->
+                    if (i["char"] == e.message[0]) {
+                        e.message = ChatColor.getByChar(i["color"].toString()).toString() + e.message
+                        return
+                    }
+                }
+            } else if (e.player.hasPermission("china2b2t.donor")) {
+                val cl = TwilightX.config.getMapList("chat-colors.donor")
+                cl.forEach { i ->
+                    if (i["char"] == e.message[0]) {
+                        e.message = ChatColor.getByChar(i["color"].toString()).toString() + e.message
+                        return
+                    }
+                }
+            } else {
+                val cl = TwilightX.config.getMapList("chat-colors.default")
+                cl.forEach { i ->
+                    if (i["char"] == e.message[0]) {
+                        e.message = ChatColor.getByChar(i["color"].toString()).toString() + e.message
+                        return
+                    }
+                }
             }
         }
     }
