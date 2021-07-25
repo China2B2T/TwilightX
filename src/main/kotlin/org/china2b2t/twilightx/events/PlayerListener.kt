@@ -3,21 +3,18 @@ package org.china2b2t.twilightx.events
 import org.bukkit.ChatColor
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.player.*
+import org.china2b2t.twilightx.GLimitStorage.Companion.isLimited
 import org.china2b2t.twilightx.MuteStorage.Companion.isMuted
-import org.bukkit.event.player.AsyncPlayerChatEvent
-import org.china2b2t.twilightx.MuteStorage
 import org.china2b2t.twilightx.TwilightX
-import org.bukkit.event.player.PlayerJoinEvent
-import org.bukkit.event.player.PlayerQuitEvent
-import org.bukkit.event.player.PlayerCommandPreprocessEvent
-import org.china2b2t.twilightx.utils.ReflectionSet
-import org.china2b2t.twilightx.utils.ReflectionSet.getEnumConstants
 
 class PlayerListener : Listener {
     @EventHandler
     fun onChat(e: AsyncPlayerChatEvent) {
         if (isMuted(e.player)) {
             if (TwilightX.config.isSet("chat-coloring") && TwilightX.config.getBoolean("chat-coloring")) {
+                // getEnumConstants(ChatColor.class)
+
                 if (e.player.isOp()) {
                     val cl = TwilightX.config.getMapList("chat-colors.admin")
                     cl.forEach { i ->
@@ -118,6 +115,20 @@ class PlayerListener : Listener {
                     e.player.sendMessage(msg.replace('&', ChatColor.COLOR_CHAR))
                 }
             }
+        }
+    }
+
+    @EventHandler
+    fun onSprint(e: PlayerToggleSprintEvent) {
+        if (e.isSprinting && !e.isCancelled && isLimited(e.player)) {
+            e.isCancelled = true
+        }
+    }
+
+    @EventHandler
+    fun onSwitchWorld(e: PlayerChangedWorldEvent) {
+        if (isLimited(e.player)) {
+            e.player.damage(5.0)
         }
     }
 }
