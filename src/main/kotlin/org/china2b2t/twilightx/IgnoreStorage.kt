@@ -7,6 +7,10 @@ class IgnoreStorage {
         var ignore: HashMap<OfflinePlayer, MutableList<OfflinePlayer>> = HashMap();
 
         fun ignore(from: OfflinePlayer, tag: OfflinePlayer) {
+            if (!ignore.containsKey(from)) {
+                return
+            }
+
             val list = ignore.get(from)!!.toMutableList()
             if (list.isNullOrEmpty()) {
                 val modified = mutableListOf(tag)
@@ -20,6 +24,10 @@ class IgnoreStorage {
         }
 
         fun unignore(from: OfflinePlayer, tag: OfflinePlayer) {
+            if (!ignore.containsKey(from)) {
+                return
+            }
+
             val list = ignore.get(from)!!
             list.drop(list.indexOf(tag))
 
@@ -27,6 +35,10 @@ class IgnoreStorage {
         }
 
         fun checkIgnored(from: OfflinePlayer, tag: OfflinePlayer): Boolean {
+            if (!ignore.containsKey(from)) {
+                return false
+            }
+
             val list = ignore.get(from)!!
             return if(list.isNullOrEmpty()) {
                 false

@@ -15,15 +15,7 @@ class PlayerListener : Listener {
             if (TwilightX.config.isSet("chat-coloring") && TwilightX.config.getBoolean("chat-coloring")) {
                 // getEnumConstants(ChatColor.class)
 
-                if (e.player.isOp()) {
-                    val cl = TwilightX.config.getMapList("chat-colors.admin")
-                    cl.forEach { i ->
-                        if (i["char"] == e.message[0]) {
-                            e.message = ChatColor.getByChar(i["color"].toString()).toString() + e.message
-                            return
-                        }
-                    }
-                } else if (e.player.hasPermission("china2b2t.donor")) {
+                if  (e.player.hasPermission("china2b2t.donor")) {
                     val cl = TwilightX.config.getMapList("chat-colors.donor")
                     cl.forEach { i ->
                         if (i["char"] == e.message[0]) {

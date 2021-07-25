@@ -29,7 +29,7 @@ class IgnoreHandler : CommandExecutor {
         sender as OfflinePlayer
 
         try {
-            val tag = Bukkit.getOfflinePlayer(args[0])
+            val tag = Bukkit.getPlayer(args[0])
 
             if (sender.ignored(tag)) {
                 sender.unignore(tag)
