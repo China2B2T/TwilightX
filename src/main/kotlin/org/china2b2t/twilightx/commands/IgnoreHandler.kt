@@ -31,15 +31,13 @@ class IgnoreHandler : CommandExecutor {
         try {
             val tag = Bukkit.getPlayer(args[0])
 
-            if (sender.ignored(tag)) {
-                sender.unignore(tag)
+            if (!sender.ignored(tag)) {
+                sender.ignore(tag)
                 sender.sendMessage(ChatColor.GREEN.toString() + "成功屏蔽来自${tag.name}的私信")
             } else {
-                sender.ignore(tag)
+                sender.unignore(tag)
                 sender.sendMessage(ChatColor.GREEN.toString() + "取消了对来自${tag.name}的私信的屏蔽")
             }
-
-            sender.sendMessage(ChatColor.GREEN.toString() + "OK")
         } catch (e: Exception) {
             e.printStackTrace()
             sender.sendMessage("Player not found!")

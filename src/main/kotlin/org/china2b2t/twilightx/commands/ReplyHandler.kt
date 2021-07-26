@@ -1,30 +1,19 @@
 package org.china2b2t.twilightx.commands
 
-import org.bukkit.entity.Player
-import org.bukkit.Bukkit
-import java.lang.StringBuilder
 import net.md_5.bungee.api.chat.ClickEvent
 import net.md_5.bungee.api.chat.TextComponent
+import org.bukkit.Bukkit
 import org.bukkit.ChatColor
-import org.bukkit.OfflinePlayer
-import org.bukkit.command.*
-import org.china2b2t.twilightx.TwilightX
-import org.bukkit.entity.Damageable
-import kotlin.Throws
-import java.lang.IllegalArgumentException
-import org.bukkit.plugin.SimplePluginManager
-import org.china2b2t.twilightx.utils.ReflectionHelper
-import org.bukkit.plugin.java.JavaPlugin
-import org.china2b2t.twilightx.ignore
+import org.bukkit.command.Command
+import org.bukkit.command.CommandExecutor
+import org.bukkit.command.CommandSender
+import org.bukkit.command.ConsoleCommandSender
+import org.bukkit.entity.Player
 import org.china2b2t.twilightx.ignored
 import java.lang.Exception
+import java.lang.StringBuilder
 
-class MsgHandler : CommandExecutor {
-    companion object {
-        var time: HashMap<Player, Long> = HashMap()
-        var recent: HashMap<Player, OfflinePlayer> = HashMap()
-    }
-
+class ReplyHandler : CommandExecutor {
     override fun onCommand(
         sender: CommandSender,
         command: Command,
@@ -35,27 +24,37 @@ class MsgHandler : CommandExecutor {
             sender.sendMessage(ChatColor.RED.toString() + "仅玩家可用！")
         }
 
-        if (args.size <= 1) {
-            sender.sendMessage(ChatColor.RED.toString() + "Usage: /msg <player> <message>")
-            return true
-        }
-
-        if (time.containsKey(sender as Player)) {
-            if (System.currentTimeMillis() - time[sender]!! <= 3000) {
+        if (MsgHandler.time.containsKey(sender as Player)) {
+            if (System.currentTimeMillis() - MsgHandler.time[sender]!! <= 3000) {
                 return true
             }
         }
 
-        time[sender] = System.currentTimeMillis()
+        MsgHandler.time[sender] = System.currentTimeMillis()
 
         try {
-            val target = Bukkit.getPlayer(args[0]) as Player
+            if (!MsgHandler.recent.containsKey(sender)) {
+                sender.sendMessage(ChatColor.RED.toString() + "没有最近的私聊活动")
+                return true
+            }
 
-            recent[sender] = target
-            recent[target] = sender
+            val target = MsgHandler.recent[sender]
+
+            if (target != null) {
+                if (!target.isOnline) {
+                    sender.sendMessage(ChatColor.RED.toString() + "对方已下线")
+                    return true
+                }
+            } else {
+                sender.sendMessage(ChatColor.RED.toString() + "没有最近的私聊活动")
+                return true
+            }
+
+            MsgHandler.recent[sender] = target
+            MsgHandler.recent[target as Player] = sender
 
             val message = StringBuilder()
-            for (i in 1 until args.size) {
+            for (i in 0 until args.size) {
                 message.append(args[i])
                 message.append(" ")
             }
@@ -70,10 +69,10 @@ class MsgHandler : CommandExecutor {
             Bukkit.getPlayer(sender.name).spigot().sendMessage(echo)
 
             if (!target.ignored(sender)) {
-                target.spigot().sendMessage(send)
+                (target as Player).spigot().sendMessage(send)
             }
         } catch (e: Exception) {
-            sender.sendMessage(ChatColor.RED.toString() + "该玩家不在线!")
+            sender.sendMessage(ChatColor.RED.toString() + "没有最近的私聊活动")
         }
         return true
     }

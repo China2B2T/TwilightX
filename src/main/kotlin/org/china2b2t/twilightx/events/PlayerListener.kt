@@ -112,7 +112,7 @@ class PlayerListener : Listener {
 
     @EventHandler
     fun onSprint(e: PlayerToggleSprintEvent) {
-        if (e.isSprinting && !e.isCancelled && isLimited(e.player)) {
+        if (!e.isSprinting && !e.isCancelled && isLimited(e.player)) {
             e.isCancelled = true
         }
     }
