@@ -44,24 +44,24 @@ class PlayerListener : Listener {
             if (e.player.isOp()) {
                 val cl = TwilightX.config.getMapList("chat-colors.admin")
                 cl.forEach { i ->
-                    if (i["char"] == e.message[0]) {
-                        e.message = ChatColor.getByChar(i["color"].toString()).toString() + e.message
+                    if (e.message.startsWith(i["char"].toString(), ignoreCase = true)) {
+                        e.message = ChatColor.COLOR_CHAR.toString() + i["color"].toString() + e.message
                         return
                     }
                 }
             } else if (e.player.hasPermission("china2b2t.donor")) {
                 val cl = TwilightX.config.getMapList("chat-colors.donor")
                 cl.forEach { i ->
-                    if (i["char"] == e.message[0]) {
-                        e.message = ChatColor.getByChar(i["color"].toString()).toString() + e.message
+                    if (e.message.startsWith(i["char"].toString(), ignoreCase = true)) {
+                        e.message = ChatColor.COLOR_CHAR.toString() + i["color"].toString() + e.message
                         return
                     }
                 }
             } else {
                 val cl = TwilightX.config.getMapList("chat-colors.default")
                 cl.forEach { i ->
-                    if (i["char"] == e.message[0]) {
-                        e.message = ChatColor.getByChar(i["color"].toString()).toString() + e.message
+                    if (e.message.startsWith(i["char"].toString(), ignoreCase = true)) {
+                        e.message = ChatColor.COLOR_CHAR.toString() + i["color"].toString() + e.message
                         return
                     }
                 }

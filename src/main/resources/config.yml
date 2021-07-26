@@ -12,21 +12,24 @@ chat-colors:
   default:
     -
       char: ">"
-      color: "GREEN"
+      color: "a"
   donor:
     -
       char: ">"
-      color: "GREEN"
+      color: "a"
     -
       char: "'"
-      color: "RED"
+      color: "6"
   admin:
     -
       char: ">"
-      color: "GREEN"
+      color: "a"
     -
       char: "!"
-      color: "RED"
+      color: "c"
+    -
+      char: "'"
+      color: "6"
 
 # Enable plugin query?
 enable-plugin-query: true

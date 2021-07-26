@@ -23,3 +23,7 @@ commands:
     description: Unmute someone
   ignore:
     description: Ignore someone
+  gl:
+    description: Limit
+  ugl:
+    description: De-limit
