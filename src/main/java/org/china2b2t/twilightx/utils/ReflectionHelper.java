@@ -19,13 +19,11 @@
 
 package org.china2b2t.twilightx.utils;
 
-import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -34,15 +32,7 @@ import java.util.StringJoiner;
 /**
  * Some reflection helper code.
  *
- * This is in FML's coremod land.
- * It's split in two because the two classes need to exist in separate classloaders.
- * Modders shouldn't be using this class anyways.
- *
- * Use {@link net.minecraftforge.fml.common.ObfuscationReflectionHelper}
- * when dealing with obfuscated fields or methods.
- *
  * @author cpw
- * @deprecated not for external use
  */
 public class ReflectionHelper
 {
@@ -109,7 +99,7 @@ public class ReflectionHelper
         }
     }
 
-    /** @deprecated use {@link #findField(Class, String, String)} */
+    /** @deprecated use {@link #findField(Class, String)} */
     public static Field findField(Class<?> clazz, String... fieldNames)
     {
         Exception failed = null;
@@ -137,9 +127,6 @@ public class ReflectionHelper
      *
      * @param clazz        The class to find the field on.
      * @param fieldName    The name of the field to find (used in developer environments, i.e. "maxStackSize").
-     * @param fieldObfName The obfuscated name of the field to find (used in obfuscated environments, i.e. "field_77777_bU").
-     *                     If the name you are looking for is on a class that is never obfuscated, this should be null.
-     *
      * @return The field with the specified name in the given class.
      */
     @Nonnull
@@ -270,8 +257,6 @@ public class ReflectionHelper
      *
      * @param clazz          The class to find the method on.
      * @param methodName     The name of the method to find (used in developer environments, i.e. "getWorldTime").
-     * @param methodObfName  The obfuscated name of the method to find (used in obfuscated environments, i.e. "func_72820_D").
-     *                       If the name you are looking for is on a class that is never obfuscated, this should be null.
      * @param parameterTypes The parameter types of the method to find.
      * @return The method with the specified name and parameters in the given class.
      */

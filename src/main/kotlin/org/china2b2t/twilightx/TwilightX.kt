@@ -42,6 +42,7 @@ class TwilightX : JavaPlugin() {
         this.server.getPluginCommand("ignore").executor = IgnoreHandler()
         this.server.getPluginCommand("gl").executor = GLHandler()
         this.server.getPluginCommand("ugl").executor = UGLHandler()
+        this.server.getPluginCommand("reply").executor = ReplyHandler()
 
         this.logger
             .log(java.util.logging.Level.INFO, org.bukkit.ChatColor.GREEN.toString() + "> TwilightX by China2B2T <")

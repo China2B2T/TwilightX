@@ -8,6 +8,9 @@ class IgnoreStorage {
 
         fun ignore(from: OfflinePlayer, tag: OfflinePlayer) {
             if (!ignore.containsKey(from)) {
+                val modified = mutableListOf(tag)
+                ignore[from] = modified
+
                 return
             }
 
@@ -29,6 +32,11 @@ class IgnoreStorage {
             }
 
             val list = ignore.get(from)!!
+
+            if (!list.contains(tag)) {
+                return
+            }
+
             list.drop(list.indexOf(tag))
 
             ignore[from] = list

@@ -27,3 +27,6 @@ commands:
     description: Limit
   ugl:
     description: De-limit
+  reply:
+    description: Reply
+    aliases: [r, rp]

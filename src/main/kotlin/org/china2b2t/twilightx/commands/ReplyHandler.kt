@@ -59,17 +59,17 @@ class ReplyHandler : CommandExecutor {
                 message.append(" ")
             }
 
-            val echoMsg = ChatColor.LIGHT_PURPLE.toString() + "发至 " + args[0] + ": " + message.toString()
+            val echoMsg = ChatColor.LIGHT_PURPLE.toString() + "发至 " + target.name + ": " + message.toString()
             val sendMsg = ChatColor.LIGHT_PURPLE.toString() + "来自 " + sender.name + ": " + message.toString()
             val send = TextComponent(sendMsg)
             val echo = TextComponent(echoMsg)
 
             send.clickEvent = ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/msg " + sender.name + " ")
-            echo.clickEvent = ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/msg " + args[0] + " ")
+            echo.clickEvent = ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/msg " + target + " ")
             Bukkit.getPlayer(sender.name).spigot().sendMessage(echo)
 
             if (!target.ignored(sender)) {
-                (target as Player).spigot().sendMessage(send)
+                target.spigot().sendMessage(send)
             }
         } catch (e: Exception) {
             sender.sendMessage(ChatColor.RED.toString() + "没有最近的私聊活动")
