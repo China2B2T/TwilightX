@@ -65,7 +65,7 @@ class ReplyHandler : CommandExecutor {
             val echo = TextComponent(echoMsg)
 
             send.clickEvent = ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/msg " + sender.name + " ")
-            echo.clickEvent = ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/msg " + target + " ")
+            echo.clickEvent = ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/msg " + target.name + " ")
             Bukkit.getPlayer(sender.name).spigot().sendMessage(echo)
 
             if (!target.ignored(sender)) {
