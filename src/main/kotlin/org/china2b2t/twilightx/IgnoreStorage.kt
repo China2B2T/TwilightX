@@ -19,7 +19,7 @@ class IgnoreStorage {
                 val modified = mutableListOf(tag)
                 ignore[from] = modified
             } else {
-                list[list.size] = tag
+                list.plus(tag)
                 ignore[from] = list
             }
 
@@ -37,7 +37,7 @@ class IgnoreStorage {
                 return
             }
 
-            list.drop(list.indexOf(tag))
+            list.remove(tag)
 
             ignore[from] = list
         }
