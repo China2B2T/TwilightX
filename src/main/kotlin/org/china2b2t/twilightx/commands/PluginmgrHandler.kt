@@ -37,6 +37,7 @@ class PluginmgrHandler : CommandExecutor {
             sender.sendMessage(prefix + "Usage: /pluginmgr <load|reload|unload> <filename (without .jar suffix)>")
             return false
         }
+        sender.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD.toString() + "This command is deprecated!")
         val action = args[0].toLowerCase()
         val pluginName = args[1]
         try {

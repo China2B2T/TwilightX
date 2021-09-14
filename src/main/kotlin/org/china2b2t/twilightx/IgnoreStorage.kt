@@ -4,7 +4,7 @@ import org.bukkit.OfflinePlayer
 
 class IgnoreStorage {
     companion object {
-        var ignore: HashMap<OfflinePlayer, MutableList<OfflinePlayer>> = HashMap();
+        var ignore: HashMap<OfflinePlayer, MutableList<OfflinePlayer>> = HashMap()
 
         fun ignore(from: OfflinePlayer, tag: OfflinePlayer) {
             if (!ignore.containsKey(from)) {
